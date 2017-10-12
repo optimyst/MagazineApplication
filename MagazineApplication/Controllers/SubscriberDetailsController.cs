@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MagazineApplication.Models;
+using PagedList;
 
 namespace MagazineApplication.Controllers
 {
@@ -15,10 +16,63 @@ namespace MagazineApplication.Controllers
         private SubscriberContext db = new SubscriberContext();
 
         // GET: SubscriberDetails
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+
         {
-            return View(db.SubscriberDetails.ToList());
+            // this creates temorary sorting order (which will be default if null)
+            ViewBag.CurrentSort = sortOrder;
+
+
+            //check is searchstring null or not and if null then list via default (from id order) chronologically
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                //if searchString is null (nada) then set searchString to user's chosen filter (descending alpha order)
+                searchString = currentFilter;
+            }
+            //THERE IS NO DATABASE
+
+            //filetering the values of the database
+            var Results = (IQueryable<subscriber>)db.Subscribers;
+
+            //assign searchString to whatever the currentFilter is
+            ViewBag.CurrentFilter = searchString;
+
+            //whatever the user sets as CurrentFilter, then sort the table
+            switch (sortOrder)
+            {
+                case "Name":
+                    Results = Results.OrderByDescending(x => x.Name);
+                    break;
+                case "Description":
+                    Results = Results.OrderByDescending(x => x.Description);
+                    break;
+                case "Address":
+                    Results = Results.OrderByDescending(x => x.Address);
+                    break;
+                case "Email":
+                    Results = Results.OrderByDescending(x => x.Email);
+                    break;
+                //Add the rest of the "coins"
+
+                default:
+                    Results = Results.OrderByDescending(x => x.Id);
+                    break;
+
+            }
+
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            return View(Results.ToPagedList(pageNumber, pageSize));
+
+            //var subscribers = db.Subscribers.Include(s => s.SubscriberDetails);
+            //return View9subscribers.ToList());
         }
+
 
         // GET: SubscriberDetails/Details/5
         public ActionResult Details(int? id)
@@ -32,12 +86,13 @@ namespace MagazineApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(subscriberDetail);
+            return View(model: subscriberDetail);
         }
 
         // GET: SubscriberDetails/Create
         public ActionResult Create()
         {
+            ViewBag.SubscriberDetailId = new SelectList(db.SubscriberDetails, "Id", "Notes");
             return View();
         }
 
@@ -55,6 +110,7 @@ namespace MagazineApplication.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.SubscriberDetailId = new SelectList(db.SubscriberDetails, "Id", "Notes");
             return View(subscriberDetail);
         }
 

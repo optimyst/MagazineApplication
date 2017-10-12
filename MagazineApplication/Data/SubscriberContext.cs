@@ -13,7 +13,7 @@ namespace MagazineApplication.Models
         public SubscriberContext() : base("DefaultConnection")
         {
         }
-        public DbSet<Subscriber> Subscribers { get; set; }
+        public DbSet<subscriber> Subscribers { get; set; }
         public DbSet<SubscriberDetail> SubscriberDetails { get; set; }
 
     }

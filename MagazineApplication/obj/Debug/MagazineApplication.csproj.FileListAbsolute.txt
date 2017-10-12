@@ -98,3 +98,7 @@ C:\Users\angel\source\repos\MagazineApplication\MagazineApplication\obj\Debug\Ma
 C:\Users\angel\source\repos\MagazineApplication\MagazineApplication\obj\Debug\MagazineApplication.Migrations.AddingPropertiesSubscriberDetailsTable.resources
 C:\Users\angel\source\repos\MagazineApplication\MagazineApplication\obj\Debug\MagazineApplication.Migrations.AddingAnnotatoionstoSubscriber.resources
 C:\Users\angel\source\repos\MagazineApplication\MagazineApplication\obj\Debug\MagazineApplication.Migrations.AddingForeignKey.resources
+C:\Users\angel\source\repos\MagazineApplication\MagazineApplication\bin\PagedList.dll
+C:\Users\angel\source\repos\MagazineApplication\MagazineApplication\bin\PagedList.Mvc.dll
+C:\Users\angel\source\repos\MagazineApplication\MagazineApplication\bin\PagedList.xml
+C:\Users\angel\source\repos\MagazineApplication\MagazineApplication\bin\PagedList.Mvc.xml

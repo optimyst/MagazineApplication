@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MagazineApplication.Models
 {
-    public class Subscriber
+    public class subscriber
     {
         public int Id { get; set; }
 
