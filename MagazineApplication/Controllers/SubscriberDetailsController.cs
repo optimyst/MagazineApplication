@@ -23,7 +23,7 @@ namespace MagazineApplication.Controllers
             ViewBag.CurrentSort = sortOrder;
 
 
-            //check is searchstring null or not and if null then list via default (from id order) chronologically
+            //check if searchstring null or not and if null then list via default (from id order) chronologically
             if (searchString != null)
             {
                 page = 1;
@@ -41,7 +41,8 @@ namespace MagazineApplication.Controllers
             //assign searchString to whatever the currentFilter is
             ViewBag.CurrentFilter = searchString;
 
-            //whatever the user sets as CurrentFilter, then sort the table
+            //whatever the user sets as CurrentFilter, then sort the table THIS IS THE SWITCH
+
             switch (sortOrder)
             {
                 case "Name":
